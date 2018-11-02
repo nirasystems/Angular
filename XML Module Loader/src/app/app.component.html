@@ -1,0 +1,58 @@
+<section class="sidebar">
+  <ul class="sidebar-menu" data-widget="tree">
+    <li class="header">Modules</li>
+    <form action="#" method="get" class="sidebar-form">
+      <div class="input-group">
+        <input (input)="filterModules()" type="text" name="q" class="form-control" [(ngModel)]="searchText" placeholder="Search...">
+        <span class="input-group-btn">
+          <button type="submit" name="search" id="search-btn" class="btn btn-flat" (click)="filterModules()">
+            <i class="fa fa-search"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+
+    <li class="header">Assistor Modules</li>
+    <perfect-scrollbar class="left-sidebar-height">
+      <li *ngFor="let module of assistModules" class="{{getCssClassIfSelected(module)}}" title="{{module.displayName}}({{module.version}})">
+        <a class="cursor-pointer truncate" (click)="setSelectedModule(module)">
+          <i class="fa fa-book"></i>
+          <span>{{module.displayName}}({{module.version}})</span>
+        </a>
+        <span *ngIf="getModuleCommentsCount(module.id) > 0" class="pull-right-container">
+          <span class="label label-primary pull-right">{{ getModuleCommentsCount(module.id) }}</span>
+        </span>
+      </li>
+    </perfect-scrollbar>
+    <li class="header">CDE Modules</li>
+    <li class="cde-button-padding" *ngIf="canAccessCdeModules()">
+      <a (click)="createCdeModule()">
+        <i class="fa fa-plus cursor-pointer"></i>
+        <button class="btn btn-primary"> Create your own CDE</button>
+      </a>
+    </li>
+    <perfect-scrollbar class="left-sidebar-height">
+      <li *ngFor="let module of cDEModules" class="{{getCssClassIfSelected(module)}}" title="{{module.displayName}}({{module.version}})">
+        <a class="cursor-pointer truncate" (click)="setSelectedModule(module)">
+          <i class="fa fa-book"></i>
+          <span>{{module.displayName}}({{module.version}})</span>
+        </a>
+        <span *ngIf="getModuleCommentsCount(module.id) > 0" class="pull-right-container">
+          <span class="label label-primary pull-right">{{ getModuleCommentsCount(module.id) }}</span>
+        </span>
+      </li>
+    </perfect-scrollbar>
+    <li class="header">TOUCH-AI</li>
+    <perfect-scrollbar class="left-sidebar-height">
+      <li *ngFor="let module of dSIModules" class="{{getCssClassIfSelected(module)}}" title="{{module.displayName}}({{module.version}})">
+        <a class="cursor-pointer truncate" (click)="setSelectedModule(module)">
+          <i class="fa fa-book"></i>
+          <span>{{module.displayName}}({{module.version}})</span>
+        </a>
+        <span *ngIf="getModuleCommentsCount(module.id) > 0" class="pull-right-container">
+          <span class="label label-primary pull-right">{{ getModuleCommentsCount(module.id) }}</span>
+        </span>
+      </li>
+    </perfect-scrollbar>
+  </ul>
+</section>
